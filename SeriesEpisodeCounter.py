@@ -1,37 +1,30 @@
-from os import sep, listdir, getcwd, chdir, path, walk
-
-
-# import os.path
-
+from os import walk
 
 class seasonable:
     def __init__(self):
-        # numbers = ["0","1","2","3","4","5","6","7","8","9"]
         types = [".mp4",".mkv",".avi",".mpeg",".mpg"]
 
         movies = [["s1"],["s2"],["s3"],["s4"],["s5"],["s6"],["s7"],["s8"],["s9"],["s10"],
-                       ["s11"],["s12"],["s13"],["s14"],["s15"],["s16"],["s17"],["s18"],["s19"],["s20"]]
+                       ["s11"],["s12"],["s13"],["s14"],["s15"],["s16"],["s17"],["s18"],["s19"],["s20"],
+                     ["21"],["22"],["23"],["24"],["25"],["26"],["27"],["28"],["29"],["30"]]
 
         for (dirpath, dirname, filenames) in walk('.'):
             for filename in filenames:
                 for type in types:
                     if type in filename:
                         filename = filename.replace(" ", "").lower().replace("season", "s").replace("فصل", "s").replace("ف","s").replace("s0", "s").replace("قسمت", "e").replace("ق", "e").replace("episode","e").replace("e0", "e")
-                        # print(filename)
 
                         season_num = filename[filename.rfind("s"):filename.rfind("e")]
-                        # print(season_num)
+
                         episode_num = filename[filename.rfind("e"):filename.rfind(".")].replace("e", "")
                         for S in movies :
                             if S[0] == season_num:
                                 S.append(episode_num)
-        # print(len(self.movies[2]))
+
         self.movies = []
         for movie in movies:
             if len(movie) > 1:
                 self.movies.append(movie)
-
-        # print(self.movies)
 
     def Ecounter(self):
         self.seasons = []
@@ -61,8 +54,10 @@ class seasonable:
                         toPrint.append(du)
                 if len(toPrint) > 1 :
                     print(str(len(toPrint)) + " Episodes are missing "+ "in " + season.replace("s","Season *") + "* :    ",str(toPrint).replace("[","").replace("]","").replace("\'",""))
-                else:
+                elif len(toPrint) == 1:
                     print("1 Episode is missing " + "in " + season.replace("s", "Season *") + "* :    ",str(toPrint).replace("[", "").replace("]", "").replace("\'",""))
+                else:
+                    print("No missing Episode found in "+season.replace("s","Season *") + "*")
 
     def Scounter(self):
         d = []
@@ -77,10 +72,11 @@ class seasonable:
 
         if len(toPrint) > 1:
             print("Missing Seasons are :    ", str(toPrint).replace("[", "").replace("]", "").replace("\'",""))
+        elif len(toPrint) == 1:
+            print("Missing Season is :    ", str(toPrint).replace("[", "").replace("]", "").replace("\'",""))
         else:
-            print("Missing Season is :    ", str(toPrint).replace("[", "").replace("]", "")).replace("\'","")
+            print("No missing Season found")
 
-        # print(self.movies)
 
 class noseason:
     def __init__(self):
@@ -115,10 +111,10 @@ class noseason:
         print("\n========Episodes========\n")
         if len(toPrint) > 1:
             print("All missing Episodes are : " + str(toPrint).replace("\'", "").replace("[","").replace("]",""))
-        else:
+        elif len(toPrint )== 1:
             print("The missing Episode is :    "+ str(toPrint).replace("\'", "").replace("[","").replace("]",""))
-
-
+        else:
+            print("No missing Episode found")
 
 
 if __name__ == "__main__":
