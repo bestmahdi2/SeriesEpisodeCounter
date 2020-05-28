@@ -10,6 +10,13 @@ QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 class MainClass(Ui_MainWindow):
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
+        
+                        # region icon
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("."+os.sep+"film.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        MainWindow.setWindowIcon(icon)
+        
+        
     def retranslateUi(self, MainWindow):
         super().retranslateUi(MainWindow)
         # _translate = QtCore.QCoreApplication.translate
