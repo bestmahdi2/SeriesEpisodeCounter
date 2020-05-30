@@ -1,11 +1,19 @@
-from PyQt5 import QtWidgets, QtCore
+from os import sep
+from PyQt5 import QtWidgets, QtCore, QtGui
 from ProgramFile.SeriesEpiCoun import Ui_MainWindow
 from ProgramFile.SeriesEpisodeCounterQT import noseason,seasonable
 
+# Handle high resolution displays:
+if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+
+
 # Hidpi scaling
-QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+# QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
 # use Hidpi icons
-QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+# QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 class MainClass(Ui_MainWindow):
     def setupUi(self, MainWindow):
@@ -13,7 +21,7 @@ class MainClass(Ui_MainWindow):
         
                         # region icon
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("."+os.sep+"film.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap("."+sep+"film.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
         MainWindow.setWindowIcon(icon)
         
         
