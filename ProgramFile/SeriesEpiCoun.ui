@@ -65,7 +65,7 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -104,7 +104,7 @@
         <string notr="true">color:#FF7F50</string>
        </property>
        <property name="text">
-        <string>Have No Seasons</string>
+        <string>Has No Seasons</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -137,7 +137,7 @@
         <string notr="true">color:#FF7F50</string>
        </property>
        <property name="text">
-        <string>Have Seasons</string>
+        <string>Has Seasons</string>
        </property>
       </widget>
      </item>
@@ -191,6 +191,7 @@
       <pointsize>11</pointsize>
       <weight>50</weight>
       <bold>false</bold>
+      <stylestrategy>PreferDefault</stylestrategy>
      </font>
     </property>
     <property name="statusTip">
