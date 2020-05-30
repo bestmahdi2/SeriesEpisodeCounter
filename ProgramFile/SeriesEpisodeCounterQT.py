@@ -2,22 +2,40 @@ from os import walk
 
 class seasonable:
     def __init__(self):
-        types = [".mp4",".mkv",".avi",".mpeg",".mpg"]
+        types = [".mp4", ".mkv", ".avi", ".mpeg", ".mpg"]
+        numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-        movies = [["s1"],["s2"],["s3"],["s4"],["s5"],["s6"],["s7"],["s8"],["s9"],["s10"],
-                       ["s11"],["s12"],["s13"],["s14"],["s15"],["s16"],["s17"],["s18"],["s19"],["s20"],
-                     ["21"],["22"],["23"],["24"],["25"],["26"],["27"],["28"],["29"],["30"]]
+        movies = [["S1"], ["S2"], ["S3"], ["S4"], ["S5"], ["S6"], ["S7"], ["S8"], ["S9"], ["S10"],
+                  ["S11"], ["S12"], ["S13"], ["S14"], ["S15"], ["S16"], ["S17"], ["S18"], ["S19"], ["S20"],
+                  ["S21"], ["S22"], ["S23"], ["S24"], ["S25"], ["S26"], ["S27"], ["S28"], ["S29"], ["S30"]]
 
         for (dirpath, dirname, filenames) in walk('.'):
             for filename in filenames:
                 for type in types:
                     if type in filename:
-                        filename = filename.replace(" ", "").lower().replace("season", "s").replace("فصل", "s").replace("ف","s").replace("s0", "s").replace("قسمت", "e").replace("ق", "e").replace("episode","e").replace("e0", "e")
+                        filename = filename.replace(" ", "").lower().replace("season", "S").replace("فصل", "S").replace(
+                            "ف", "S").replace("s0", "S").replace("قسمت", "E").replace("ق", "E").replace("episode",
+                                                                                                        "E").replace(
+                            "e0", "E").replace("10bit", "").replace("1080p", "").replace("1080", "").replace("720p",
+                                                                                                             "").replace(
+                            "720", "").replace("x265", "").replace("x264", "").replace("480p", "").replace("480",
+                                                                                                           "").replace(
+                            "4k", "")
+                        filename = filename.replace("s1", "S1").replace("s2", "S2").replace("e3", "E3").replace("e4",
+                                                                                                                "E4").replace(
+                            "e5", "E5").replace("e6", "E6").replace("e7", "E7").replace("e8", "E8").replace("e9", "E9")
+                        filename = filename.replace("e1", "E1").replace("e2", "E2").replace("e3", "E3").replace("e4",
+                                                                                                                "E4").replace(
+                            "e5", "E5").replace("e6", "E6").replace("e7", "E7").replace("e8", "E8").replace("e9", "E9")
 
-                        season_num = filename[filename.rfind("s"):filename.rfind("e")]
+                        season_num = filename[filename.rfind("S"):filename.rfind("E")]
 
-                        episode_num = filename[filename.rfind("e"):filename.rfind(".")].replace("e", "")
-                        for S in movies :
+                        episode_num = filename[filename.rfind("E"):filename.rfind("E") + 3].replace("E", "")
+                        for letter in episode_num:
+                            if letter not in numbers:
+                                episode_num = episode_num.replace(letter, "")
+
+                        for S in movies:
                             if S[0] == season_num:
                                 S.append(episode_num)
 
@@ -25,6 +43,7 @@ class seasonable:
         for movie in movies:
             if len(movie) > 1:
                 self.movies.append(movie)
+        # print(self.movies)
 
     def Ecounter(self):
         self.seasons = []
@@ -33,7 +52,7 @@ class seasonable:
         for movie in self.movies:
             if len(movie) != 1:
                 season = movie[0]
-                self.seasons.append(int(season.replace("s","")))
+                self.seasons.append(int(season.replace("S","")))
                 movie.remove(movie[0])
 
                 x = 0
@@ -81,13 +100,25 @@ class noseason:
             for filename in filenames:
                 for type in types:
                     if type in filename:
-                        filename = filename.replace(" ", "").lower().replace("قسمت", "e").replace("ق", "e").replace(
-                            "episode", "e").replace("e0", "e")
-                        episode_num = filename[filename.rfind("e"):filename.rfind(".")].replace("e", "")
+                        filename = filename.replace(" ", "").lower().replace("قسمت", "E").replace("ق", "E").replace(
+                            "episode", "E").replace("e0", "E").replace("10bit", "").replace("1080p", "").replace("1080",
+                                                                                                                 "").replace(
+                            "720p", "").replace("720", "").replace("x265", "").replace("x264", "").replace("480p",
+                                                                                                           "").replace(
+                            "480", "").replace("4k", "")
+                        filename = filename.replace("e1", "E1").replace("e2", "E2").replace("e3", "E3").replace("e4",
+                                                                                                                "E4").replace(
+                            "e5", "E5").replace("e6", "E6").replace("e7", "E7").replace("e8", "E8").replace("e9", "E9")
+
+                        episode_num = filename[filename.rfind("E"):filename.rfind("E") + 4].replace("E", "")
+                        for letter in episode_num:
+                            if letter not in numbers:
+                                episode_num = episode_num.replace(letter, "")
+
                         for num in numbers:
                             if num in episode_num:
                                 Episodes.append(int(episode_num))
-    
+
         Episodes = list(filter(None, Episodes))
         Episodes = sorted(Episodes)
     

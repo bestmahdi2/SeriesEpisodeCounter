@@ -67,11 +67,11 @@ class MainClass(Ui_MainWindow):
                     E.remove(E[-1])
 
                     if len(E) > 1 :
-                        toPrintE.append(str(len(E)) + " Episodes are missing "+ "in " + season.replace("s","Season *") + "* :    "+str(E).replace("[","").replace("]","").replace("\'",""))
+                        toPrintE.append(str(len(E)) + " Episodes are missing "+ "in " + season.replace("S","Season *") + "* :    "+str(E).replace("[","").replace("]","").replace("\'",""))
                     elif len(E) == 1:
-                        toPrintE.append("1 Episode is missing " + "in " + season.replace("s", "Season *") + "* :    "+str(E).replace("[", "").replace("]", "").replace("\'",""))
+                        toPrintE.append("1 Episode is missing " + "in " + season.replace("S", "Season *") + "* :    "+str(E).replace("[", "").replace("]", "").replace("\'",""))
                     else:
-                        toPrintE.append("No missing Episode found in "+season.replace("s","Season *") + "*")
+                        toPrintE.append("No missing Episode found in "+season.replace("S","Season *") + "*")
                     toPrintE.append("\n\n")
 
                 self.textBrowserEpi.setText("========Episodes========\n\n" +"".join(toPrintE))
