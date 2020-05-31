@@ -13,19 +13,16 @@ class seasonable:
             for filename in filenames:
                 for type in types:
                     if type in filename:
-                        filename = filename.replace(" ", "").lower().replace("season", "S").replace("فصل", "S").replace(
-                            "ف", "S").replace("s0", "S").replace("قسمت", "E").replace("ق", "E").replace("episode",
-                                                                                                        "E").replace(
-                            "e0", "E").replace("10bit", "").replace("1080p", "").replace("1080", "").replace("720p",
-                                                                                                             "").replace(
-                            "720", "").replace("x265", "").replace("x264", "").replace("480p", "").replace("480",
-                                                                                                           "").replace(
+                        filename = filename.replace(" ", "").lower().replace("season", "s").replace("فصل", "s").replace(
+                            "ف", "s").replace("s0", "s").replace("قسمت", "e").replace("ق", "e").replace("episode","e").replace(
+                            "e0", "e").replace("10bit", "").replace("1080p", "").replace("1080", "").replace("720p","").replace(
+                            "720", "").replace("x265", "").replace("x264", "").replace("480p", "").replace("480","").replace(
                             "4k", "")
-                        filename = filename.replace("s1", "S1").replace("s2", "S2").replace("e3", "E3").replace("e4",
-                                                                                                                "E4").replace(
-                            "e5", "E5").replace("e6", "E6").replace("e7", "E7").replace("e8", "E8").replace("e9", "E9")
-                        filename = filename.replace("e1", "E1").replace("e2", "E2").replace("e3", "E3").replace("e4",
-                                                                                                                "E4").replace(
+
+                        filename = filename.replace("s1", "S1").replace("s2", "S2").replace("s3", "S3").replace("s4","S4").replace(
+                            "s5", "S5").replace("s6", "S6").replace("s7", "S7").replace("s8", "S8").replace("s9", "S9")
+
+                        filename = filename.replace("e1", "E1").replace("e2", "E2").replace("e3", "E3").replace("e4","E4").replace(
                             "e5", "E5").replace("e6", "E6").replace("e7", "E7").replace("e8", "E8").replace("e9", "E9")
 
                         season_num = filename[filename.rfind("S"):filename.rfind("E")]
@@ -100,14 +97,12 @@ class noseason:
             for filename in filenames:
                 for type in types:
                     if type in filename:
-                        filename = filename.replace(" ", "").lower().replace("قسمت", "E").replace("ق", "E").replace(
-                            "episode", "E").replace("e0", "E").replace("10bit", "").replace("1080p", "").replace("1080",
-                                                                                                                 "").replace(
-                            "720p", "").replace("720", "").replace("x265", "").replace("x264", "").replace("480p",
-                                                                                                           "").replace(
+                        filename = filename.replace(" ", "").lower().replace("قسمت", "e").replace("ق", "e").replace(
+                            "episode", "e").replace("e0", "e").replace("10bit", "").replace("1080p", "").replace("1080","").replace(
+                            "720p", "").replace("720", "").replace("x265", "").replace("x264", "").replace("480p","").replace(
                             "480", "").replace("4k", "")
-                        filename = filename.replace("e1", "E1").replace("e2", "E2").replace("e3", "E3").replace("e4",
-                                                                                                                "E4").replace(
+
+                        filename = filename.replace("e1", "E1").replace("e2", "E2").replace("e3", "E3").replace("e4","E4").replace(
                             "e5", "E5").replace("e6", "E6").replace("e7", "E7").replace("e8", "E8").replace("e9", "E9")
 
                         episode_num = filename[filename.rfind("E"):filename.rfind("E") + 4].replace("E", "")
