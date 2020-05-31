@@ -53,11 +53,14 @@ class MainClass(Ui_MainWindow):
                 Sea = M.missSeason
                 Epi = M.missEpisode
 
-                print(Sea)
+                # print(Sea)
 
-                if len(Sea) > 2:
+                # if [] in Sea :
+                #     Sea.remove([])
+
+                if len(Sea[0]) > 1:
                     toPrintS = "Missing Seasons are :    " +str(Sea).replace("[", "").replace("]", "").replace("\'","")
-                elif len(Sea) == 2:
+                elif len(Sea[0]) == 1:
                     toPrintS = "Missing Season is :    "+ str(Sea).replace("[", "").replace("]", "").replace("\'","")
                 else:
                     toPrintS = "No missing Season found"
