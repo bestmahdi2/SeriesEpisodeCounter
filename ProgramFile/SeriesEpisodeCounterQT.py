@@ -1,7 +1,7 @@
 from os import walk
 
 class seasonable:
-    def __init__(self):
+    def __init__(self,dir):
         types = [".mp4", ".mkv", ".avi", ".mpeg", ".mpg"]
         numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
@@ -9,7 +9,7 @@ class seasonable:
                   ["S11"], ["S12"], ["S13"], ["S14"], ["S15"], ["S16"], ["S17"], ["S18"], ["S19"], ["S20"],
                   ["S21"], ["S22"], ["S23"], ["S24"], ["S25"], ["S26"], ["S27"], ["S28"], ["S29"], ["S30"]]
 
-        for (dirpath, dirname, filenames) in walk('.'):
+        for (dirpath, dirname, filenames) in walk(dir):
             for filename in filenames:
                 for type in types:
                     if type in filename:
@@ -87,13 +87,13 @@ class seasonable:
         self.missSeason.append(toPrint)
 
 class noseason:
-    def __init__(self):
+    def __init__(self,dir):
         self.missEpisode = []
         types = [".mp4", ".mkv", ".avi", ".mpeg", ".mpg"]
         numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         Episodes = []
     
-        for (dirpath, dirname, filenames) in walk('.'):
+        for (dirpath, dirname, filenames) in walk(dir):
             for filename in filenames:
                 for type in types:
                     if type in filename:

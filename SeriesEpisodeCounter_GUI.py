@@ -1,7 +1,11 @@
-from os import sep
+from sys import argv,exit
+from os import sep,getcwd
 from PyQt5 import QtWidgets, QtCore, QtGui
-from ProgramFile.SeriesEpiCoun import Ui_MainWindow
 from ProgramFile.SeriesEpisodeCounterQT import noseason,seasonable
+from ProgramFile.SeriesEpiCoun import Ui_MainWindow
+from ProgramFile.Help import Ui_Dialog
+
+
 
 # Handle high resolution displays:
 # if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
@@ -10,14 +14,16 @@ from ProgramFile.SeriesEpisodeCounterQT import noseason,seasonable
 #     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
 class MainClass(Ui_MainWindow):
+    def __init__(self):
+        self.dir = ""
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
-        
-                        # region icon
+        self.lineEdit_address.setText(getcwd())
+    # region icon
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("."+sep+"film.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
         MainWindow.setWindowIcon(icon)
-        
+    # endregion
         
     def retranslateUi(self, MainWindow):
         super().retranslateUi(MainWindow)
@@ -27,7 +33,7 @@ class MainClass(Ui_MainWindow):
         self.label_Error.setText("")
         if self.radioButton_No.isChecked() == True:
             try:
-                M = noseason()
+                M = noseason(self.dir)
                 Epi = M.missEpisode
                 toPrint = ""
                 if len(Epi) == 0:
@@ -37,7 +43,7 @@ class MainClass(Ui_MainWindow):
                 if len(Epi) > 1:
                     toPrint = "All missing Episodes are : " + str(Epi).replace("\'", "").replace("[", "").replace("]","")
 
-                self.textBrowserEpi.setText("========Episodes========\n" + "\n" + toPrint)
+                self.textBrowserEpi.setText(toPrint)
                 self.textBrowserSeri.setText("")
 
             except :
@@ -47,7 +53,7 @@ class MainClass(Ui_MainWindow):
             try:
                 toPrintE = []
                 toPrintS = ""
-                M = seasonable()
+                M = seasonable(self.dir)
                 M.Ecounter()
                 M.Scounter()
                 Sea = M.missSeason
@@ -65,7 +71,7 @@ class MainClass(Ui_MainWindow):
                 else:
                     toPrintS = "No missing Season found"
 
-                self.textBrowserSeri.setText("========Seasons========\n\n"+ toPrintS)
+                self.textBrowserSeri.setText(toPrintS)
 
                 for E in Epi:
                     season = E[-1]
@@ -79,23 +85,49 @@ class MainClass(Ui_MainWindow):
                         toPrintE.append("No missing Episode found in "+season.replace("S","Season *") + "*")
                     toPrintE.append("\n\n")
 
-                self.textBrowserEpi.setText("========Episodes========\n\n" +"".join(toPrintE))
+                self.textBrowserEpi.setText("".join(toPrintE))
             except :
                 self.label_Error.setText("Error accrued !!! , be sure about season choice.")
 
 if __name__ == "__main__":
-    from sys import argv , exit
     app = QtWidgets.QApplication(argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = MainClass()
     ui.setupUi(MainWindow)
     ###
-    ui.calculator()
+
+    def helpB():
+        class help(Ui_Dialog):
+            def __init__(self):
+                Dialog = QtWidgets.QDialog()
+                Dia = Ui_Dialog()
+                Dia.setupUi(Dialog)
+                Dialog.show()
+                Dialog.exec_()
+        H = help()
+
+    def openDir():
+        file_path = ""
+        from tkinter import filedialog, Tk
+        root = Tk()
+        root.withdraw()
+        file_path = filedialog.askdirectory(title="Select Directory",initialdir="/")
+        ui.lineEdit_address.setText(file_path.replace("/",sep).replace("\\",sep))
+
+    def OK():
+        adress = ui.lineEdit_address.text()
+        ui.dir = adress
+        ui.calculator()
+
+    ui.button_help.clicked.connect(helpB)
+    ui.pushButton_open.clicked.connect(openDir)
+    ui.button_OK.clicked.connect(OK)
+
     ui.radioButton_yes.setChecked(False)
     ui.radioButton_No.setChecked(False)
 
-    ui.radioButton_yes.clicked.connect(ui.calculator)
-    ui.radioButton_No.clicked.connect(ui.calculator)
+    # ui.radioButton_yes.clicked.connect(ui.calculator)
+    # ui.radioButton_No.clicked.connect(ui.calculator)
     ###
 
     MainWindow.show()
