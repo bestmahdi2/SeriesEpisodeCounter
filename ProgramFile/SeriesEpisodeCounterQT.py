@@ -46,16 +46,17 @@ class seasonable:
         self.seasons = []
         self.missEpisode = []
         x = 0
-        for movie in self.movies:
-            if len(movie) != 1:
-                season = movie[0]
-                self.seasons.append(int(season.replace("S","")))
-                movie.remove(movie[0])
+        for movie_Str in self.movies:
+            if len(movie_Str) != 1:
+                season = movie_Str[0]
+                self.seasons.append(int(season.replace("S", "")))
+                movie_Str.remove(movie_Str[0])
 
+                movie = []
                 x = 0
-                while x < len(movie):
-                    movie[x] = int(movie[x])
-                    x +=1
+                while x < len(movie_Str):
+                    movie.append(int(movie_Str[x]))
+                    x += 1
 
                 movie = list(filter(None, movie))
                 movie = sorted(movie)
@@ -68,7 +69,7 @@ class seasonable:
 
                 toPrint = []
                 for du in d:
-                    if du not in str(movie):
+                    if du not in movie_Str:
                         toPrint.append(du)
                 toPrint.append(season)
                 self.missEpisode.append(toPrint)
@@ -92,6 +93,7 @@ class noseason:
         types = [".mp4", ".mkv", ".avi", ".mpeg", ".mpg"]
         numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         Episodes = []
+        Episodes_Str = []
     
         for (dirpath, dirname, filenames) in walk(dir):
             for filename in filenames:
@@ -112,6 +114,7 @@ class noseason:
 
                         for num in numbers:
                             if num in episode_num:
+                                Episodes_Str.append(episode_num)
                                 Episodes.append(int(episode_num))
 
         Episodes = list(filter(None, Episodes))
@@ -125,7 +128,7 @@ class noseason:
     
         toPrint = []
         for du in d:
-            if du not in str(Episodes):
+            if du not in Episodes_Str:
                 toPrint.append(du)
         self.missEpisode = toPrint
 
